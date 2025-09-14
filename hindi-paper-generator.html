@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>हिंदी परीक्षा पत्र जनरेटर</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: #1a73e8;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            padding: 0;
+        }
+        
+        .form-section {
+            flex: 1;
+            padding: 25px;
+            background: #f9f9f9;
+            border-right: 1px solid #eee;
+        }
+        
+        .preview-section {
+            flex: 2;
+            padding: 25px;
+            background: white;
+            min-height: 800px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a73e8;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        button:hover {
+            background: #0d5bba;
+        }
+        
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .question-type {
+            font-weight: 600;
+            color: #1a73e8;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            margin-bottom: 10px;
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 5px;
+        }
+        
+        .paper-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #1a73e8;
+        }
+        
+        .paper-title {
+            font-size: 2rem;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        
+        .paper-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .instructions {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #1a73e8;
+        }
+        
+        .section-title {
+            background: #1a73e8;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 25px 0 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .form-section {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>हिंदी परीक्षा पत्र जनरेटर</h1>
+            <p class="subtitle">अपनी आवश्यकताओं के अनुसार हिंदी परीक्षा पत्र तैयार करें</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="form-section">
+                <h2>पेपर विवरण</h2>
+                
+                <div class="form-group">
+                    <label for="paperTitle">पेपर का शीर्षक</label>
+                    <input type="text" id="paperTitle" value="हिंदी - वार्षिक परीक्षा">
+                </div>
+                
+                <div class="form-group">
+                    <label for="class">कक्षा</label>
+                    <select id="class">
+                        <option>कक्षा 6</option>
+                        <option>कक्षा 7</option>
+                        <option>कक्षा 8</option>
+                        <option>कक्षा 9</option>
+                        <option selected>कक्षा 10</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="totalMarks">कुल अंक</label>
+                    <input type="number" id="totalMarks" value="80">
+                </div>
+                
+                <div class="form-group">
+                    <label for="time">समय</label>
+                    <input type="text" id="time" value="3 घंटे">
+                </div>
+                
+                <h2>प्रश्न जोड़ें</h2>
+                
+                <div class="form-group">
+                    <label for="questionType">प्रश्न प्रकार</label>
+                    <select id="questionType">
+                        <option>बहुविकल्पीय प्रश्न (MCQ)</option>
+                        <option>रिक्त स्थान भरिए (FIB)</option>
+                        <option>सुमेलित कीजिए</option>
+                        <option>अर्थ लिखिए</option>
+                        <option>सत्य/असत्य</option>
+                        <option>लघु उत्तरीय प्रश्न</option>
+                        <option>दीर्घ उत्तरीय प्रश्न</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="questionText">प्रश्न</label>
+                    <textarea id="questionText" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="questionMarks">अंक</label>
+                    <input type="number" id="questionMarks" value="1">
+                </div>
+                
+                <button onclick="addQuestion()">प्रश्न जोड़ें</button>
+                <button onclick="generatePaper()" style="background: #0d5bba; margin-top: 10px;">पेपर जनरेट करें</button>
+                <button onclick="printPaper()" style="background: #34a853; margin-top: 10px;">पेपर प्रिंट करें</button>
+                <button onclick="clearAll()" style="background: #ea4335; margin-top: 10px;">सब साफ करें</button>
+            </div>
+            
+            <div class="preview-section">
+                <div class="paper-header">
+                    <div class="paper-title">हिंदी - वार्षिक परीक्षा</div>
+                    <div class="paper-meta">
+                        <span>कक्षा: 10</span>
+                        <span>कुल अंक: 80</span>
+                        <span>समय: 3 घंटे</span>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <strong>सामान्य निर्देश:</strong>
+                    <ol>
+                        <li>सभी प्रश्न अनिवार्य हैं।</li>
+                        <li>प्रश्न क्रमांक के अनुसार उत्तर लिखें।</li>
+                        <li>आवश्यकतानुसार ही उत्तर सीमा निर्धारित करें।</li>
+                    </ol>
+                </div>
+                
+                <div id="questionsPreview">
+                    <!-- Questions will be generated here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 हिंदी परीक्षा पत्र जनरेटर | एक शिक्षण सहायक उपकरण</p>
+        </div>
+    </div>
+
+    <script>
+        // Data storage for questions
+        let questions = [];
+        
+        // Sample questions for demonstration
+        const sampleQuestions = [
+            {
+                type: "बहुविकल्पीय प्रश्न (MCQ)",
+                text: "'निःशुल्क' का सही विलोम शब्द है:",
+                marks: 1,
+                options: ["सशुल्क", "निरावरण", "सावधान", "निर्दोष"]
+            },
+            {
+                type: "रिक्त स्थान भरिए (FIB)",
+                text: "'आग' का विलोम शब्द ______ है।",
+                marks: 1
+            },
+            {
+                type: "सुमेलित कीजिए",
+                text: "निम्नलिखित शब्दों के विलोम शब्दों से मिलान कीजिए:",
+                marks: 2,
+                pairs: [
+                    { left: "अपव्यय", right: "मितव्यय" },
+                    { left: "असफल", right: "सफल" }
+                ]
+            },
+            {
+                type: "लघु उत्तरीय प्रश्न",
+                text: "'निःशुल्क' और 'सशुल्क' शब्दों में अंतर स्पष्ट कीजिए।",
+                marks: 2
+            }
+        ];
+        
+        // Initialize with sample questions
+        window.onload = function() {
+            questions = [...sampleQuestions];
+            renderQuestions();
+        };
+        
+        // Function to add a new question
+        function addQuestion() {
+            const type = document.getElementById('questionType').value;
+            const text = document.getElementById('questionText').value;
+            const marks = parseInt(document.getElementById('questionMarks').value);
+            
+            if (!text) {
+                alert('कृपया प्रश्न दर्ज करें');
+                return;
+            }
+            
+            const question = { type, text, marks };
+            
+            // Add options for MCQ questions
+            if (type === 'बहुविकल्पीय प्रश्न (MCQ)') {
+                question.options = ['विकल्प 1', 'विकल्प 2', 'विकल्प 3', 'विकल्प 4'];
+            }
+            
+            // Add pairs for matching questions
+            if (type === 'सुमेलित कीजिए') {
+                question.pairs = [
+                    { left: "वस्तु 1", right: "मिलान 1" },
+                    { left: "वस्तु 2", right: "मिलान 2" }
+                ];
+            }
+            
+            questions.push(question);
+            renderQuestions();
+            
+            // Clear the form
+            document.getElementById('questionText').value = '';
+        }
+        
+        // Function to render questions in the preview
+        function renderQuestions() {
+            const preview = document.getElementById('questionsPreview');
+            preview.innerHTML = '';
+            
+            // Group questions by type
+            const questionsByType = {};
+            questions.forEach(q => {
+                if (!questionsByType[q.type]) {
+                    questionsByType[q.type] = [];
+                }
+                questionsByType[q.type].push(q);
+            });
+            
+            // Render each question type section
+            Object.keys(questionsByType).forEach(type => {
+                const typeQuestions = questionsByType[type];
+                const totalMarks = typeQuestions.reduce((sum, q) => sum + q.marks, 0);
+                
+                const sectionTitle = document.createElement('div');
+                sectionTitle.className = 'section-title';
+                sectionTitle.textContent = `${type} (${totalMarks} अंक)`;
+                preview.appendChild(sectionTitle);
+                
+                typeQuestions.forEach((q, index) => {
+                    const questionEl = document.createElement('div');
+                    questionEl.className = 'question-block';
+                    
+                    const questionText = document.createElement('div');
+                    questionText.className = 'question-text';
+                    questionText.innerHTML = `<strong>प्रश्न ${index + 1}.</strong> ${q.text} <strong>[${q.marks} अंक]</strong>`;
+                    questionEl.appendChild(questionText);
+                    
+                    // Add options for MCQ
+                    if (q.options) {
+                        const optionsEl = document.createElement('div');
+                        optionsEl.className = 'options';
+                        q.options.forEach((opt, optIndex) => {
+                            const optEl = document.createElement('div');
+                            optEl.className = 'option';
+                            optEl.textContent = `${String.fromCharCode(97 + optIndex)}) ${opt}`;
+                            optionsEl.appendChild(optEl);
+                        });
+                        questionEl.appendChild(optionsEl);
+                    }
+                    
+                    // Add pairs for matching questions
+                    if (q.pairs) {
+                        const pairsEl = document.createElement('div');
+                        pairsEl.className = 'options';
+                        q.pairs.forEach(pair => {
+                            const pairEl = document.createElement('div');
+                            pairEl.className = 'option';
+                            pairEl.textContent = `${pair.left} - ${pair.right}`;
+                            pairsEl.appendChild(pairEl);
+                        });
+                        questionEl.appendChild(pairsEl);
+                    }
+                    
+                    preview.appendChild(questionEl);
+                });
+            });
+        }
+        
+        // Function to generate the paper with current settings
+        function generatePaper() {
+            const paperTitle = document.getElementById('paperTitle').value;
+            const paperClass = document.getElementById('class').value;
+            const totalMarks = document.getElementById('totalMarks').value;
+            const time = document.getElementById('time').value;
+            
+            document.querySelector('.paper-title').textContent = paperTitle;
+            document.querySelector('.paper-meta').innerHTML = `
+                <span>कक्षा: ${paperClass}</span>
+                <span>कुल अंक: ${totalMarks}</span>
+                <span>समय: ${time}</span>
+            `;
+            
+            renderQuestions();
+            
+            alert('पेपर जनरेट हो गया है!');
+        }
+        
+        // Function to print the paper
+        function printPaper() {
+            window.print();
+        }
+        
+        // Function to clear all questions
+        function clearAll() {
+            if (confirm('क्या आप वाकई सभी प्रश्न हटाना चाहते हैं?')) {
+                questions = [];
+                renderQuestions();
+            }
+        }
+    </script>
+</body>
+</html>
